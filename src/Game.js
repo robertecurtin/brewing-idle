@@ -5,6 +5,7 @@ import ResourceBar from './ResourceBar'
 import Upgrade from './Upgrade'
 import ResourceManager from './ResourceManager'
 import Button from './Button'
+import Upgrades from './config/Upgrades'
 
 function Game() {
     const cashManager = ResourceManager('cash', 10)
@@ -15,13 +16,13 @@ function Game() {
                 <ResourceBar dollars={cashManager.getValue()} beer={beerManager.getValue()} />
             </Row>
             <Row>
-                <Button text={'Get a dollar'} isPurchasable={() => true} isVisible={() => true} callback={
+                <Button text={'Get ' + cashManager.getIncrementValue() + ' dollars'} isPurchasable={() => true} isVisible={() => true} callback={
                     () => {
                         cashManager.add(1)
                     }
                 } />
 
-                <Button text={'Buy a beer'} isPurchasable={() => cashManager.getValue() >= 10} isVisible={() => true} callback={
+                <Button text={'Buy ' + beerManager.getIncrementValue() + ' beers'} isPurchasable={() => cashManager.getValue() >= 10} isVisible={() => true} callback={
                     () => {
                         beerManager.add(1)
                         cashManager.subtract(10)
@@ -30,13 +31,10 @@ function Game() {
             </Row>
 
             <Row>
-                <Upgrade
-                    isPurchasable={() => beerManager.getValue() >= 12}
-                    name={'Basic upgrade'}
-                    text={'Doubles cash gained'}
-                    callback={() => {
-                        cashManager.registerAddFunction((v) => 2 * v)
-                    }} />
+                <Upgrades
+                beerManager={beerManager}
+                cashManager={cashManager}
+                />
             </Row>
         </Container>
     </div>

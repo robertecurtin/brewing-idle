@@ -17,6 +17,13 @@ export default (title, _value) => {
     getValue: () => {
       return value
     },
+    getIncrementValue: () => {
+      let v = 1
+      for (let f of addFunctions) {
+        v = f(v)
+      }
+      return v
+    },
     registerAddFunction: (f) => {
       addFunctions.push(f)
       setAddFunctions(addFunctions)
