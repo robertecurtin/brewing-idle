@@ -32,8 +32,8 @@ function Game() {
 
             <Row>
                 <Upgrades
-                beerManager={beerManager}
-                cashManager={cashManager}
+                    beerManager={beerManager}
+                    cashManager={cashManager}
                 />
             </Row>
         </Container>

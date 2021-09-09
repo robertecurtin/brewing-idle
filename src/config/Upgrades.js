@@ -8,10 +8,10 @@ function Upgrades(props) {
   const cashManager = props.cashManager
 
   const payCosts = (costs) => {
-    if(costs.cash) {
+    if (costs.cash) {
       cashManager.subtract(costs.cash)
     }
-    if(costs.beer) {
+    if (costs.beer) {
       beerManager.subtract(costs.beer)
     }
   }
