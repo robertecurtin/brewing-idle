@@ -1,0 +1,36 @@
+{
+  "name": "brewing-idle",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-scripts": "4.0.0",
+    "react-bootstrap": "1.4.0",
+    "bootstrap": "4.5.3"
+  },
+  "description": "Brewing idle game",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "semistandard": "^13.0.1"
+  },
+  "author": "Robert Curtin",
+  "license": "MIT",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

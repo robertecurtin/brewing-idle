@@ -1,2 +1,1 @@
-# brewing-idle
-A brewing idle game
+WIP
