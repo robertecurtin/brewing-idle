@@ -14,8 +14,8 @@ function Upgrade(props) {
     }
     onClick={() => {
       if (props.isPurchasable() && !purchased) {
-        setPurchased(true)
-        props.callback()
+        setPurchased(true);
+        props.callback();
       }
     }
     }

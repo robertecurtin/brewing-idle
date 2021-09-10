@@ -6,7 +6,7 @@ function ResourceBar(props) {
   return <Container>
     <Col>Cash: ${props.dollars}</Col>
     <Col>Beer: {props.beer} bottles</Col>
-  </Container>
+  </Container>;
 }
 
 export default ResourceBar;

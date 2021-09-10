@@ -1,24 +1,27 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import React  from 'react';
 import { Button } from 'react-bootstrap';
 
-export default (props) => {
-  const isPurchasable = props.isPurchasable()
+const self = (props) => {
+  const isPurchasable = props.isPurchasable();
   if (props.isVisible()) {
     return <Button
       variant='primary'
       onClick={() => {
         if (isPurchasable) {
-          props.callback()
+          props.callback();
         }
       }
       }
       disabled={!isPurchasable}
     >
       {props.text}
-    </Button>
+    </Button>;
   }
   else {
-    return <div />
+    return <div />;
   }
 };
+
+self.propTypes = {
+  props: PropTypes.func.isRequired
+}

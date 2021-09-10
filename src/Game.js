@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Container, Row } from 'react-bootstrap';
-import ResourceBar from './ResourceBar'
-import Upgrade from './Upgrade'
-import ResourceManager from './ResourceManager'
-import Button from './Button'
-import Upgrades from './config/Upgrades'
+import ResourceBar from './ResourceBar';
+import Upgrade from './Upgrade';
+import ResourceManager from './ResourceManager';
+import Button from './Button';
+import Upgrades from './config/Upgrades';
 
 function Game() {
-    const cashManager = ResourceManager('cash', 10)
-    const beerManager = ResourceManager('beer', 11)
+    const cashManager = ResourceManager('cash', 10);
+    const beerManager = ResourceManager('beer', 11);
     return <div className='Game'>
         <Container>
             <Row>
@@ -18,14 +18,14 @@ function Game() {
             <Row>
                 <Button text={'Get ' + cashManager.getIncrementValue() + ' dollars'} isPurchasable={() => true} isVisible={() => true} callback={
                     () => {
-                        cashManager.add(1)
+                        cashManager.add(1);
                     }
                 } />
 
                 <Button text={'Buy ' + beerManager.getIncrementValue() + ' beers'} isPurchasable={() => cashManager.getValue() >= 10} isVisible={() => true} callback={
                     () => {
-                        beerManager.add(1)
-                        cashManager.subtract(10)
+                        beerManager.add(1);
+                        cashManager.subtract(10);
                     }
                 } />
             </Row>
@@ -37,7 +37,7 @@ function Game() {
                 />
             </Row>
         </Container>
-    </div>
+    </div>;
 }
 
 export default Game;
