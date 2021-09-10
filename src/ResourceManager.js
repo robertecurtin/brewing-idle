@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import { useState } from 'react';
 
 export default (title, _value) => {
   const [value, setValue] = useState(_value);

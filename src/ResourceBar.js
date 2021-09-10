@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import { Container, Row, Col } from 'react-bootstrap';
+import React from 'react';
+import { Container, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 function ResourceBar(props) {
   return <Container>
@@ -8,5 +8,10 @@ function ResourceBar(props) {
     <Col>Beer: {props.beer} bottles</Col>
   </Container>;
 }
+
+ResourceBar.propTypes = {
+  dollars: PropTypes.number.isRequired,
+  beer: PropTypes.number.isRequired
+};
 
 export default ResourceBar;

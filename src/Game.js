@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import ResourceBar from './ResourceBar';
-import Upgrade from './Upgrade';
 import ResourceManager from './ResourceManager';
 import Button from './Button';
-import Upgrades from './config/Upgrades';
+import Upgrades from './Upgrades';
+import upgradeRow1Config from './config/upgradeRow1Config';
 
 function Game() {
     const cashManager = ResourceManager('cash', 10);
@@ -34,6 +33,7 @@ function Game() {
                 <Upgrades
                     beerManager={beerManager}
                     cashManager={cashManager}
+                    config={upgradeRow1Config}
                 />
             </Row>
         </Container>

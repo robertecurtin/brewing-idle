@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 function Upgrade(props) {
   const [purchased, setPurchased] = useState(false);
@@ -29,4 +29,10 @@ function Upgrade(props) {
   </Card>;
 };
 
+Upgrade.propTypes = {
+  isPurchasable: PropTypes.func.isRequired,
+  callback: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  text: PropTypes.string
+};
 export default Upgrade;

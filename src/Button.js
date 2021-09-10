@@ -1,5 +1,6 @@
 import React  from 'react';
 import { Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const self = (props) => {
   const isPurchasable = props.isPurchasable();
@@ -24,4 +25,6 @@ const self = (props) => {
 
 self.propTypes = {
   props: PropTypes.func.isRequired
-}
+};
+
+export default self;
