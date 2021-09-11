@@ -4,7 +4,8 @@ import Upgrade from './Upgrade';
 import PropTypes from 'prop-types';
 
 function Upgrades(props) {
-  const beerManager = props.beerManager;
+  const beerExpManager = props.beerExpManager;
+  const businessExpManager = props.businessExpManager;
   const cashManager = props.cashManager;
   const config = props.config;
 
@@ -12,8 +13,11 @@ function Upgrades(props) {
     if (costs.cash) {
       cashManager.subtract(costs.cash);
     }
-    if (costs.beer) {
-      beerManager.subtract(costs.beer);
+    if (costs.beerExp) {
+      beerExpManager.subtract(costs.beerExp);
+    }
+    if (costs.businessExp) {
+      businessExpManager.subtract(costs.businessExp);
     }
   };
 
@@ -22,8 +26,8 @@ function Upgrades(props) {
     payCosts(costs);
   };
 
-  const multiplyBeerGainBy = (v, costs) => () => {
-    beerManager.registerAddFunction((b) => 6 * b);
+  const multiplybeerExpGainBy = (v, costs) => () => {
+    beerExpManager.registerAddFunction((b) => 6 * b);
     payCosts(costs);
   };
 
@@ -33,7 +37,7 @@ function Upgrades(props) {
         return <Col key={'none'}>
           <Upgrade
             isPurchasable={() =>
-              beerManager.getValue() >= upgrade.costs.beer &&
+              beerExpManager.getValue() >= upgrade.costs.beerExp &&
               cashManager.getValue() >= upgrade.costs.cash
             }
             name={upgrade.name}
@@ -43,8 +47,8 @@ function Upgrades(props) {
                 multiplyCashGain: () => {
                   multiplyCashGainBy(upgrade.value, upgrade.costs)();
                 },
-                multiplyBeerGain: () => {
-                  multiplyBeerGainBy(upgrade.value, upgrade.costs)();
+                multiplybeerExpGain: () => {
+                  multiplybeerExpGainBy(upgrade.value, upgrade.costs)();
                 }
               };
               functions[upgrade.function]();
@@ -65,16 +69,18 @@ const managerPropTypes = PropTypes.shape({
 });
 
 Upgrades.propTypes = {
-  beerManager: managerPropTypes,
+  beerExpManager: managerPropTypes,
+  businessExpManager: managerPropTypes,
   cashManager: managerPropTypes,
   config: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     text: PropTypes.string,
-    function: PropTypes.oneOf['multiplyCashGain', 'multiplyBeerGain'],
+    function: PropTypes.oneOf['multiplyCashGain', 'multiplyBeerExpGain'],
     value: PropTypes.number,
     costs: PropTypes.shape({
       cash: PropTypes.number,
-      beer: PropTypes.number
+      beerExp: PropTypes.number,
+      businessExp: PropTypes.number
     })
   })
   )
