@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
+
 import ResourceBar from './ResourceBar';
 import ResourceManager from './ResourceManager';
 import Upgrades from './Upgrades';
 import Careers from './Careers';
 import upgradeRow1Config from './config/upgradeRow1Config';
+import careerConfig from './config/careerConfig';
 
 function Game() {
-    const cashManager = ResourceManager('cash', 10);
-    const beerExpManager = ResourceManager('beerExp', 11);
-    const businessExpManager = ResourceManager('businessExp', 11);
+    const cashManager = ResourceManager('cash', 0);
+    const beerExpManager = ResourceManager('beerExp', 1);
+    const businessExpManager = ResourceManager('businessExp', 1);
     const [currentJob, setCurrentJob] = useState('Bartender');
+    const [timeElapsed, setTimeElapsed] = useState(false);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            for (let career of careerConfig) {
+                for (let job of career) {
+                    if (currentJob == job.title) {
+                        cashManager.add(job.generates.cash);
+                        beerExpManager.add(job.generates.beerExp);
+                        businessExpManager.add(job.generates.businessExpManager);
+                    }
+                }
+            }
+        }, 1000);
+        return () => clearInterval(timer);
+    });
+
+
     return <div className='Game'>
         <Container>
             <Row>
@@ -21,43 +41,14 @@ function Game() {
                 />
             </Row>
             <Row>
-                <Careers currentJob={currentJob} setCurrentJob={setCurrentJob}/>
-                {/* {currentJob}
-                <Form>
-                    <Form.Check
-                        inline
-                        label="1"
-                        name="group1"
-                        type="radio"
-                        id={`inline-radio-1`}
-                        onChange={() => setCurrentJob('Bart ender')}
-                    />
-                    <Form.Check
-                        inline
-                        label="2"
-                        name="group1"
-                        type="radio"
-                        id={`inline-radio-2`}
-                        onChange={() => setCurrentJob('Bar tender')}
-                    />
-                </Form> */}
-
+                <Careers
+                    currentJob={currentJob}
+                    setCurrentJob={setCurrentJob}
+                    config={careerConfig}
+                    timeElapsed={timeElapsed}
+                    setTimeElapsed={setTimeElapsed}
+                />
             </Row>
-            {/* <Row>
-                <Button text={'Get ' + cashManager.getIncrementValue() + ' dollars'} isPurchasable={() => true} isVisible={() => true} callback={
-                    () => {
-                        cashManager.add(1);
-                    }
-                } />
-
-                <Button text={'Buy ' + beerManager.getIncrementValue() + ' beers'} isPurchasable={() => cashManager.getValue() >= 10} isVisible={() => true} callback={
-                    () => {
-                        beerManager.add(1);
-                        cashManager.subtract(10);
-                    }
-                } />
-            </Row> */}
-
             <Row>
                 <Upgrades
                     cashManager={cashManager}

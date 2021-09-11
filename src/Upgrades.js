@@ -1,7 +1,9 @@
 import React from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
-import Upgrade from './Upgrade';
 import PropTypes from 'prop-types';
+
+import Upgrade from './Upgrade';
+import managerPropTypes from './managerPropTypes';
 
 function Upgrades(props) {
   const beerExpManager = props.beerExpManager;
@@ -34,7 +36,7 @@ function Upgrades(props) {
   return <Container>
     <Row>
       {config.map((upgrade) => {
-        return <Col key={'none'}>
+        return <Col key={upgrade.name}>
           <Upgrade
             isPurchasable={() =>
               beerExpManager.getValue() >= upgrade.costs.beerExp &&
@@ -60,13 +62,6 @@ function Upgrades(props) {
     </Row>
   </Container>;
 };
-
-const managerPropTypes = PropTypes.shape({
-  add: PropTypes.func.isRequired,
-  registerAddFunction: PropTypes.func.isRequired,
-  subtract: PropTypes.func.isRequired,
-  getValue: PropTypes.func.isRequired
-});
 
 Upgrades.propTypes = {
   beerExpManager: managerPropTypes,

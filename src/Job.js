@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
 
-const Career = (props) => {
+const Job = (props) => {
   if (props.isVisible()) {
     return <Form.Check
       inline
       label={props.title}
-      name='career'
+      name='job'
       type="radio"
       id={`inline-radio-${props.title}`}
       onChange={() => props.setCurrentJob(props.title)}
@@ -18,10 +18,10 @@ const Career = (props) => {
   }
 };
 
-Career.propTypes = {
+Job.propTypes = {
   title: PropTypes.string.isRequired,
   setCurrentJob: PropTypes.func.isRequired,
   isVisible: PropTypes.func.isRequired
 };
 
-export default Career;
+export default Job;

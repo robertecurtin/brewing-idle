@@ -5,12 +5,15 @@ export default (title, _value) => {
   const [addFunctions, setAddFunctions] = useState([]);
   return {
     add: (v) => {
+      if (typeof v != 'number') { return; }
+
       for (let f of addFunctions) {
         v = f(v);
       }
       setValue(value + v);
     },
     subtract: (v) => {
+      if (typeof v != 'number') { return; }
       setValue(value - v);
     },
     getValue: () => {
