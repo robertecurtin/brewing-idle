@@ -6,8 +6,9 @@ import Career from './Job';
 import managerPropTypes from './managerPropTypes';
 
 const Careers = (props) => {
-  // const beerExpManager = props.beerExpManager;
-  // const cashManager = props.cashManager;
+  const dollars = props.dollars;
+  const beerExp = props.beerExp;
+  const businessExp = props.businessExp;
   const config = props.config;
 
   return <Container>
@@ -20,7 +21,11 @@ const Careers = (props) => {
                 return <Career
                   key={job.title}
                   setCurrentJob={props.setCurrentJob}
-                  isVisible={() => true}
+                  isVisible={() =>
+                    (dollars * 10 >= job.requirement.cash) &&
+                    (beerExp * 10 >= job.requirement.beerExp) &&
+                    (businessExp * 10 >= job.requirement.businessExp)
+                  }
                   title={job.title}
                   text={job.text}
                 />;
@@ -38,10 +43,13 @@ const Careers = (props) => {
 Careers.propTypes = {
   currentJob: PropTypes.string.isRequired,
   setCurrentJob: PropTypes.func.isRequired,
+  dollars: PropTypes.number.isRequired,
+  beerExp: PropTypes.number.isRequired,
+  businessExp: PropTypes.number.isRequired,
   beerExpManager: managerPropTypes,
   businessExpManager: managerPropTypes,
   cashManager: managerPropTypes,
-  config: PropTypes.arrayOf(PropTypes.shape({
+  config: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     text: PropTypes.string,
     generates: PropTypes.shape({
@@ -49,7 +57,7 @@ Careers.propTypes = {
       beerExp: PropTypes.number,
       businessExp: PropTypes.number
     })
-  })
+  }))
   )
 };
 

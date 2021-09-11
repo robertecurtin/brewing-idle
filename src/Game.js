@@ -22,7 +22,7 @@ function Game() {
                     if (currentJob == job.title) {
                         cashManager.add(job.generates.cash);
                         beerExpManager.add(job.generates.beerExp);
-                        businessExpManager.add(job.generates.businessExpManager);
+                        businessExpManager.add(job.generates.businessExp);
                     }
                 }
             }
@@ -47,6 +47,9 @@ function Game() {
                     config={careerConfig}
                     timeElapsed={timeElapsed}
                     setTimeElapsed={setTimeElapsed}
+                    dollars={cashManager.getValue()}
+                    beerExp={beerExpManager.getValue()}
+                    businessExp={businessExpManager.getValue()}
                 />
             </Row>
             <Row>
