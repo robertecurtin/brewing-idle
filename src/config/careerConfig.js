@@ -1,6 +1,14 @@
 module.exports = [
   [
     {
+      title: 'Unemployed',
+      text: '',
+      generates: { cash: 0, beerExp: 0, businessExp: 0 },
+      requirement: { cash: 0, beerExp: 0, businessExp: 0 },
+    }
+  ],
+  [
+    {
       title: 'Desk Jockey',
       text: 'Generates $2/second',
       generates: { cash: 2, beerExp: 0, businessExp: 0 },
@@ -28,7 +36,7 @@ module.exports = [
     },
     {
       title: 'Bar owner',
-      text: 'Generates 2$/second and 3 brewing exp/second',
+      text: 'Generates $2/second and 3 brewing exp/second',
       generates: { cash: 2, beerExp: 3, businessExp: 0 },
       requirement: { cash: 20, beerExp: 20, businessExp: 0 },
     }

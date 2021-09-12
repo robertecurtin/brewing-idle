@@ -11,6 +11,7 @@ const Job = (props) => {
       type="radio"
       id={`inline-radio-${props.title}`}
       onChange={() => props.setCurrentJob(props.title)}
+      disabled={props.jobs[props.title] != true}
     />;
   }
   else {
@@ -21,7 +22,8 @@ const Job = (props) => {
 Job.propTypes = {
   title: PropTypes.string.isRequired,
   setCurrentJob: PropTypes.func.isRequired,
-  isVisible: PropTypes.func.isRequired
+  isVisible: PropTypes.func.isRequired,
+  jobs: PropTypes.object.isRequired
 };
 
 export default Job;

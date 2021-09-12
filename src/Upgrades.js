@@ -34,32 +34,38 @@ function Upgrades(props) {
   };
 
   return <Container>
-    <Row>
-      {config.map((upgrade) => {
-        return <Col key={upgrade.name}>
-          <Upgrade
-            isPurchasable={() =>
-              beerExpManager.getValue() >= upgrade.costs.beerExp &&
-              cashManager.getValue() >= upgrade.costs.cash
-            }
-            name={upgrade.name}
-            text={upgrade.text}
-            callback={() => {
-              const functions = {
-                multiplyCashGain: () => {
-                  multiplyCashGainBy(upgrade.value, upgrade.costs)();
-                },
-                multiplybeerExpGain: () => {
-                  multiplybeerExpGainBy(upgrade.value, upgrade.costs)();
-                }
-              };
-              functions[upgrade.function]();
-            }
-            }
-          />
-        </Col>;
-      })}
-    </Row>
+    {config.map((row) => {
+      return <Row key={`row-containing-${row[0].name}`}>
+        {row.map((upgrade) => {
+          return <Col key={upgrade.name}>
+            <Upgrade
+              isPurchasable={() =>
+                beerExpManager.getValue() >= upgrade.costs.beerExp &&
+                cashManager.getValue() >= upgrade.costs.cash &&
+                businessExpManager.getValue() >= upgrade.costs.businessExp
+              }
+              name={upgrade.name}
+              text={upgrade.text}
+              callback={() => {
+                const functions = {
+                  multiplyCashGain: () => {
+                    multiplyCashGainBy(upgrade.value, upgrade.costs)();
+                  },
+                  multiplybeerExpGain: () => {
+                    multiplybeerExpGainBy(upgrade.value, upgrade.costs)();
+                  },
+                  unlockJob: () => {
+                    props.unlockJob(upgrade.value);
+                  }
+                };
+                functions[upgrade.function]();
+              }
+              }
+            />
+          </Col>;
+        })}
+      </Row>;
+    })}
   </Container>;
 };
 
@@ -67,18 +73,21 @@ Upgrades.propTypes = {
   beerExpManager: managerPropTypes,
   businessExpManager: managerPropTypes,
   cashManager: managerPropTypes,
-  config: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-    text: PropTypes.string,
-    function: PropTypes.oneOf['multiplyCashGain', 'multiplyBeerExpGain'],
-    value: PropTypes.number,
-    costs: PropTypes.shape({
-      cash: PropTypes.number,
-      beerExp: PropTypes.number,
-      businessExp: PropTypes.number
-    })
-  })
-  )
+  unlockJob: PropTypes.func.isRequired,
+  config: PropTypes.arrayOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        text: PropTypes.string,
+        function: PropTypes.oneOf['multiplyCashGain', 'multiplyBeerExpGain'],
+        value: PropTypes.oneOfType([PropTypes.number,PropTypes.string]),
+        costs: PropTypes.shape({
+          cash: PropTypes.number,
+          beerExp: PropTypes.number,
+          businessExp: PropTypes.number
+        })
+      })
+    ))
 };
 
 export default Upgrades;

@@ -5,15 +5,18 @@ import ResourceBar from './ResourceBar';
 import ResourceManager from './ResourceManager';
 import Upgrades from './Upgrades';
 import Careers from './Careers';
-import upgradeRow1Config from './config/upgradeRow1Config';
+import JobTracker from './JobTracker';
+import upgradeConfig from './config/upgradeConfig';
 import careerConfig from './config/careerConfig';
 
 function Game() {
     const cashManager = ResourceManager('cash', 0);
     const beerExpManager = ResourceManager('beerExp', 1);
     const businessExpManager = ResourceManager('businessExp', 1);
-    const [currentJob, setCurrentJob] = useState('Bartender');
+    const [currentJob, setCurrentJob] = useState('Unemployed');
     const [timeElapsed, setTimeElapsed] = useState(false);
+    const [jobs, setJobs] = useState({ Unemployed: true });
+    const jobTracker = JobTracker(jobs, setJobs);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -44,6 +47,7 @@ function Game() {
                 <Careers
                     currentJob={currentJob}
                     setCurrentJob={setCurrentJob}
+                    jobs={jobs}
                     config={careerConfig}
                     timeElapsed={timeElapsed}
                     setTimeElapsed={setTimeElapsed}
@@ -57,7 +61,8 @@ function Game() {
                     cashManager={cashManager}
                     beerExpManager={beerExpManager}
                     businessExpManager={businessExpManager}
-                    config={upgradeRow1Config}
+                    config={upgradeConfig}
+                    unlockJob={jobTracker.unlockJob}
                 />
             </Row>
         </Container>
