@@ -1,2 +1,3 @@
 WIP
-[Try an iffy version here](https://robertecurtin.github.io/brewing-idle)
+
+[Try a proof of concept version here!](https://robertecurtin.github.io/brewing-idle)
